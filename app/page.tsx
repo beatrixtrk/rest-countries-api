@@ -1,113 +1,229 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
+import SearchBar from "@/components/SearchBar";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
+import FilterInput from "@/components/FilterInput";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from 'lucide-react';
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+interface Language {
+    name: string;
 }
+
+interface Country {
+    alpha3Code: string;
+    borders: string[];
+    languages: Language[];
+    topLevelDomain: string[];
+    subregion: string;
+    nativeName: string;
+    name: string;
+    population: number;
+    region: string;
+    capital: string;
+    flag: string;
+}
+
+const Home: React.FC = () => {
+    const [countries, setCountries] = useState<Country[]>([]);
+    const [filteredCountries, setFilteredCountries] = useState<Country[]>([]);
+    const [searchQuery, setSearchQuery] = useState<string>("");
+    const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+    const [selectedRegion, setSelectedRegion] = useState<string>("");
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("/data.json");
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                const data: Country[] = await response.json();
+                setCountries(data);
+                setFilteredCountries(data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        let filtered = countries;
+
+        if (searchQuery) {
+            filtered = filtered.filter((country) =>
+                country.name.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+        }
+
+        if (selectedRegion) {
+            filtered = filtered.filter((country) => country.region === selectedRegion);
+        }
+
+        setFilteredCountries(filtered);
+    }, [searchQuery, selectedRegion, countries]);
+
+    const handleSearch = (query: string) => {
+        setSearchQuery(query);
+    };
+
+    const handleCardClick = (country: Country) => {
+        setSelectedCountry(country);
+    };
+
+    const handleRegionChange = (region: string) => {
+        setSelectedRegion(region);
+    };
+
+    const handleBackClick = () => {
+        setSelectedCountry(null);
+    };
+
+    const handleBorderClick = (borderCode: string) => {
+        const borderCountry = countries.find((country) => country.alpha3Code === borderCode);
+        if (borderCountry) {
+            setSelectedCountry(borderCountry);
+        }
+    };
+
+    return (
+        <main className="min-h-screen p-4 md:px-[80px] md:py-12">
+            {!selectedCountry ? (
+                <div>
+                    <div className="md:flex items-center justify-between">
+                        <SearchBar onSearch={handleSearch} />
+                        <FilterInput onRegionChange={handleRegionChange} />
+                    </div>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[75px]">
+                        {filteredCountries.map((country) => (
+                            <Card
+                                key={country.name}
+                                className="rounded-[5px] border-none shadow-custom-card dark:shadow-dark-custom-card cursor-pointer"
+                                onClick={() => handleCardClick(country)}
+                            >
+                                <div className="w-full max-h-[160px] h-full rounded-t-[5px] overflow-hidden flex items-center justify-center">
+                                    <Image src={country.flag} alt={country.name} width={350} height={160} className="h-full object-cover" />
+                                </div>
+                                <CardHeader>
+                                    <CardTitle className="text-lg font-extrabold tracking-[.5px]">
+                                        {country.name}
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="text-sm font-semibold mb-2">
+                                        Population:{" "}
+                                        <span className="font-light">
+                                            {country.population.toLocaleString()}
+                                        </span>
+                                    </p>
+                                    <p className="text-sm font-semibold mb-2">
+                                        Region: <span className="font-light">{country.region}</span>
+                                    </p>
+                                    <p className="text-sm font-semibold mb-2">
+                                        Capital: <span className="font-light">{country.capital}</span>
+                                    </p>
+                                </CardContent>
+                            </Card>
+                        ))}
+                    </div>
+                </div>
+            ) : (
+                <div className="w-full">
+                    <div className="flex justify-between items-center mb-16 md:mb-20">
+                        <Button
+                            className="rounded-[6px] bg-card text-card-foreground shadow-button dark:shadow-dark-button"
+                            onClick={handleBackClick}
+                        >
+                            <ArrowLeft className="h-5 w-5 mr-2" />
+                            Back
+                        </Button>
+                    </div>
+                    <div className="flex">
+                        <div className="w-1/2">
+                            <Image
+                                src={selectedCountry.flag}
+                                alt={selectedCountry.name}
+                                width={560}
+                                height={400}
+                                className="rounded-[10px] shadow-flag dark:shadow-dark-flag"
+                            />
+                        </div>
+                        <div className="w-1/2">
+                            <h2 className="text-[22px] md:text-[32px] mb-4 md:md-[23px] font-extrabold">{selectedCountry.name}</h2>
+
+                            <div className="flex mb-[34px] md:mb-[70px]">
+                                <div className="w-1/2 mb-8 md:mb-0">
+                                    <p className="text-sm font-semibold mb-2">
+                                        Native Name:{" "}
+                                        <span className="font-light">
+                                            {selectedCountry.nativeName}
+                                        </span>
+                                    </p>
+                                    <p className="text-sm font-semibold mb-2">
+                                        Population:{" "}
+                                        <span className="font-light">
+                                            {selectedCountry.population.toLocaleString()}
+                                        </span>
+                                    </p>
+                                    <p className="text-sm font-semibold mb-2">
+                                        Region:{" "}
+                                        <span className="font-light">{selectedCountry.region}</span>
+                                    </p>
+                                    <p className="text-sm font-semibold mb-2">
+                                        Sub Region:{" "}
+                                        <span className="font-light">{selectedCountry.subregion}</span>
+                                    </p>
+                                    <p className="text-sm font-semibold mb-2">
+                                        Capital:{" "}
+                                        <span className="font-light">{selectedCountry.capital}</span>
+                                    </p>
+                                </div>
+                                <div className="w-1/2">
+                                    <p className="text-sm font-semibold mb-2">
+                                        Top Level Domain:{" "}
+                                        {selectedCountry.topLevelDomain.map((domain) => (
+                                            <span key={domain} className="font-light">{domain}</span>
+                                        ))}
+                                    </p>
+                                    <p className="text-sm font-semibold mb-2">
+                                        Currencies:{" "}
+                                        <span className="font-light">{selectedCountry.capital}</span>
+                                    </p>
+                                    <p className="text-sm font-semibold mb-2">
+                                        Languages:{" "}
+                                        {selectedCountry.languages.map((lang, index) => (
+                                            <span key={lang.name} className="font-light">
+                                                {lang.name}
+                                                {index < selectedCountry.languages.length - 1 ? ", " : ""}
+                                            </span>
+                                        ))}
+                                    </p>
+                                </div>
+                            </div>
+                            {selectedCountry.borders && (
+                                <div className="flex flex-wrap items-center">
+                                    <p className="text-base font-semibold mr-4 mb-2">
+                                        Border Countries:
+                                    </p>
+                                    <div className="flex flex-wrap">
+                                        {selectedCountry.borders.map((border) => (
+                                            <Button key={border} onClick={() => handleBorderClick(border)} className="min-w-[96px] max-h-[28px] mr-[10px] rounded-[2px] mb-2 bg-card text-sm text-card-foreground shadow-button dark:shadow-dark-button">
+                                                {border}
+                                            </Button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
+        </main>
+    );
+};
+
+export default Home;
