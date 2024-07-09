@@ -82,7 +82,7 @@ const Home: React.FC = () => {
         setSelectedCountry(null);
         setSearchQuery("");
         setSelectedRegion("");
-        setFilteredCountries(countries); // Reset the filtered countries to all countries
+        setFilteredCountries(countries);
     };
 
     const handleBorderClick = (borderCode: string) => {
@@ -144,6 +144,7 @@ const Home: React.FC = () => {
                         <Button
                             className="rounded-[6px] bg-card text-card-foreground shadow-button dark:shadow-dark-button"
                             onClick={handleBackClick}
+                            title="Back"
                         >
                             <ArrowLeft className="h-5 w-5 mr-2" />
                             Back
@@ -218,7 +219,7 @@ const Home: React.FC = () => {
                                     </p>
                                     <div className="flex flex-wrap">
                                         {selectedCountry.borders.map((border) => (
-                                            <Button key={border} onClick={() => handleBorderClick(border)} className="min-w-[96px] max-h-[28px] mr-[10px] rounded-[2px] mb-2 bg-card text-sm text-card-foreground shadow-button dark:shadow-dark-button">
+                                            <Button key={border} onClick={() => handleBorderClick(border)} title={getCountryNameByAlpha3Code(border)} className="min-w-[96px] max-h-[28px] mr-[10px] rounded-[2px] mb-2 bg-card text-sm text-card-foreground shadow-button dark:shadow-dark-button">
                                                 {getCountryNameByAlpha3Code(border)}
                                             </Button>
                                         ))}
