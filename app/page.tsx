@@ -33,7 +33,6 @@ const Home: React.FC = () => {
     const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
     const [selectedRegion, setSelectedRegion] = useState<string>("");
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -81,6 +80,9 @@ const Home: React.FC = () => {
 
     const handleBackClick = () => {
         setSelectedCountry(null);
+        setSearchQuery("");
+        setSelectedRegion("");
+        setFilteredCountries(countries); // Reset the filtered countries to all countries
     };
 
     const handleBorderClick = (borderCode: string) => {
@@ -88,6 +90,11 @@ const Home: React.FC = () => {
         if (borderCountry) {
             setSelectedCountry(borderCountry);
         }
+    };
+
+    const getCountryNameByAlpha3Code = (alpha3Code: string) => {
+        const country = countries.find((country) => country.alpha3Code === alpha3Code);
+        return country ? country.name : alpha3Code;
     };
 
     return (
@@ -212,7 +219,7 @@ const Home: React.FC = () => {
                                     <div className="flex flex-wrap">
                                         {selectedCountry.borders.map((border) => (
                                             <Button key={border} onClick={() => handleBorderClick(border)} className="min-w-[96px] max-h-[28px] mr-[10px] rounded-[2px] mb-2 bg-card text-sm text-card-foreground shadow-button dark:shadow-dark-button">
-                                                {border}
+                                                {getCountryNameByAlpha3Code(border)}
                                             </Button>
                                         ))}
                                     </div>
